@@ -1,0 +1,20 @@
+- name: Config file etc-sysconfig-network-scripts for centos7
+  template:
+     src:  ifcfg.j2
+     dest: /etc/sysconfig/network-scripts/ifcfg-{{ item.device }}
+  with_items: "{{ network_ifaces | default([]) }}"
+  when:  ansible_facts['distribution'] == "CentOS"
+  notify:
+    - Restarting Network for Centos 7
+
+
+- name: Config file etc-network-interfaces for U16-14
+  template:
+     src: interfaces.j2
+     dest: /etc/network/interfaces
+  with_items: "{{ network_ifaces | default([]) }}"
+  notify:
+     - Restarting Network for Ubuntu16
+  when:  ansible_facts['distribution'] == "Ubuntu"
+  
+  

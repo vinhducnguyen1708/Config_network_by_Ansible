@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+auto lo
+iface lo inet loopback
+
+#Network interfaces
+
+{% for   item in network_ifaces  %}
+auto {{ item.device }}
+iface {{ item.device }} inet {{ item.bootproto }}
+{% if 'ip' in item %}
+address {{ item.ip }}
+{% endif %}
+{% if 'netmask' in item %}
+netmask {{ item.netmask }}
+{% endif %}
+{% if 'gateway' in item %}
+gateway {{ item.gateway }}
+{% endif %}
+{%- if 'dns' in item %}
+dns-nameservers {{ item.dns | join(' ')  }}
+{% endif %}
+{% if 'mtu' in item %}
+mtu {{ item.mtu }}
+{% endif %}
+
+{%   endfor %}
+

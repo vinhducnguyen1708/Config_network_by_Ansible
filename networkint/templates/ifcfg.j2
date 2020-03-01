@@ -1,0 +1,22 @@
+TYPE=Ethernet
+NAME={{ item.device }}
+{% if 'bootproto' in item %}
+BOOTPROTO={{ item.bootproto }}
+{% endif %}
+DEVICE={{ item.device }}
+ONBOOT=yes
+{% if 'ip' in item %}
+IPADDR={{ item.ip }}
+{% endif %}
+{% if 'netmask' in item %}
+NETMASK={{ item.netmask }}
+{% endif %}
+{% if 'gateway' in item %}
+GATEWAY={{ item.gateway }}
+{% endif %}
+{% if 'dns' in item %}
+DNS1={{ item.dns.0 }}
+{% endif %}
+{% if 'dns' in item %}
+DNS2={{ item.dns.1 }}
+{% endif %}

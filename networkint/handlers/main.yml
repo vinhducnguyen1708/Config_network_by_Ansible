@@ -1,0 +1,8 @@
+- name: Restarting Network for Centos 7
+  become: yes
+  service: name=network state=restarted
+- name: Restarting Network for Ubuntu16
+  become: yes
+  service:
+    name: networking
+    state: restarted
