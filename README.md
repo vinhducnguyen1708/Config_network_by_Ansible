@@ -5,7 +5,7 @@
 - Bước 1: Chỉnh sửa file inventory
 ```ini
 [ubuntu]
-192.168.30.36 ansible_python_interpreter=/usr/bin/python3 
+192.168.30.36 ansible_python_interpreter=/usr/bin/python3 #Tùy chọn do Ansible của tôi cài không giao tiếp được với python2 trên Ubuntu
 [centos]
 192.168.20.39 
 ```
