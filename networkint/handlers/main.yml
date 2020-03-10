@@ -1,8 +1,22 @@
 - name: Restarting Network for Centos 7
   become: yes
-  service: name=network state=restarted
-- name: Restarting Network for Ubuntu16
+  systemd: name=network state=restarted
+- name: Restarting Network for Ubuntu
   become: yes
-  service:
+  systemd:
     name: networking
     state: restarted
+- name: Disable Network manager Centos
+  become: yes
+  systemd:
+    name: NetworkManager
+    state: stopped
+    enabled: no
+    
+- name: Disable Network manager Ubuntu
+  become: yes
+  systemd:
+    name: network-manager
+    state: stopped
+    enabled: no    
+   

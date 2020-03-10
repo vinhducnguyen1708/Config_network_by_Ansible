@@ -3,9 +3,12 @@
      src:  ifcfg.j2
      dest: /etc/sysconfig/network-scripts/ifcfg-{{ item.device }}
   with_items: "{{ network_ifaces | default([]) }}"
-  when:  ansible_facts['distribution'] == "CentOS"
+  when: 
+    -  ansible_facts['distribution'] == "CentOS" 
+    - ansible_facts['distribution_major_version'] == "7"  
   notify:
     - Restarting Network for Centos 7
+    - Disable Network manager Centos
 
 
 - name: Config file etc-network-interfaces for U16-14
@@ -14,7 +17,8 @@
      dest: /etc/network/interfaces
   with_items: "{{ network_ifaces | default([]) }}"
   notify:
-     - Restarting Network for Ubuntu16
-  when:  ansible_facts['distribution'] == "Ubuntu"
-  
+    - Restarting Network for Ubuntu16
+  when: 
+    -  ansible_facts['distribution'] == "Ubuntu"
+    - ansible_facts['distribution_major_version'] == "16.04"  
   
